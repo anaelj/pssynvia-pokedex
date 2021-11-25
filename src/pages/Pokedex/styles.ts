@@ -5,7 +5,7 @@ export const SearchBar = styled.div`
   flex: 1;
   max-width: 910px;
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -36,25 +36,32 @@ export const MainContainer = styled.div`
 export const MainContent = styled.div`
   display: flex;
   flex: 2;
+  justify-content: flex-start;
 `;
 
-interface IListContainerProps {
-  like?: boolean;
-}
-
-export const ListContainerItem = styled.li<IListContainerProps>`
+export const ListContainerItem = styled.li`
   margin: 5px;
   padding: 5px;
-  width: 135px;
+  /* background: yellow; */
+  max-width: 135px;
+  padding-left: 40px;
+  @media (min-width: 460px) {
+    padding-left: 5px;
+  }
   height: 230px;
   display: flex;
+  flex: 1;
   flex-direction: column;
   cursor: pointer;
 
   img {
+    display: flex;
+    flex: 1;
+    width: 135px;
     border-radius: 0.5em;
     background: var(--color-light-gray);
   }
+
   svg {
     display: block;
     position: relative;
@@ -64,6 +71,7 @@ export const ListContainerItem = styled.li<IListContainerProps>`
     margin-left: 90px;
     padding: 7px;
   }
+
   .number {
     color: var(--color-dark-gray);
     padding: 5px;
@@ -85,15 +93,26 @@ export const ListContainer = styled.div`
   display: flex;
   flex: 2;
   height: 800px;
+  margin-top: 0px;
+  padding-top: 0px;
+  
   ul {
+    margin-top: 0px;
+    padding-top: 0px;
+
     display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: flex-start;
+    align-items: flex-start;
     flex-wrap: wrap;
     max-width: 800px;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 800px;
-    @media (max-width: 860px) {
-      width: auto;
+    height: 520px;
+    width: auto;
+
+    @media (min-width: 860px) {
+      width: 800px;
+      
     }
 
     overflow-y: auto;
@@ -122,6 +141,7 @@ export const FilterContainer = styled.div`
   gap: 6px;
   flex-wrap: wrap;
   margin-top: 10px;
+  margin-left: 5px;
 `;
 
 export const OrderingContainer = styled.div`
