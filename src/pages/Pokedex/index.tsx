@@ -144,7 +144,7 @@ export const Pokedex = () => {
       selected: false,
     },
     {
-      caption: "Número Ascendente",
+      caption: "Número Descendente",
       value: "NumeroDescendente",
       selected: false,
     },
@@ -228,6 +228,8 @@ export const Pokedex = () => {
         </SearchBar>
         <MainContent>
           <FilterContainer>
+          <h2 style={{marginBottom:'8px'}}>Filtrar por</h2>
+            
             {pokeTypes.map((item, idx) => (
               <Button
                 key={idx}

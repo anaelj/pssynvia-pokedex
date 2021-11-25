@@ -46,7 +46,7 @@ export const ListContainerItem = styled.li<IListContainerProps>`
   
     margin: 5px;
     padding: 5px;
-    width: 120px;
+    width: 135px;
     height: 230px;
     display: flex;
     flex-direction: column;

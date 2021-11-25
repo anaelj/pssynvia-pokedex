@@ -14,7 +14,7 @@ export const Header = () => {
           </LogoApp>
           <Logout>
             <img src="assets/synvia-A.svg" alt="logo-synvia" />
-            <FiLogOut color="white" />
+            <FiLogOut color="white" size={24} />
           </Logout>
         </HeaderCenter>
       </Content>
