@@ -43,43 +43,42 @@ interface IListContainerProps {
 }
 
 export const ListContainerItem = styled.li<IListContainerProps>`
-  
-    margin: 5px;
+  margin: 5px;
+  padding: 5px;
+  width: 135px;
+  height: 230px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  img {
+    border-radius: 0.5em;
+    background: var(--color-light-gray);
+  }
+  svg {
+    display: block;
+    position: relative;
+    color: var(--color-red);
+
+    margin-bottom: -30px;
+    margin-left: 90px;
+    padding: 7px;
+  }
+  .number {
+    color: var(--color-dark-gray);
     padding: 5px;
-    width: 135px;
-    height: 230px;
+  }
+  .name {
+    color: var(--color-black);
+    font-size: 20px;
+    font-weight: 700;
+    padding: 5px;
+  }
+  .types {
     display: flex;
-    flex-direction: column;
-
-    img {
-      border-radius: 0.5em;
-      background: var(--color-light-gray);
-    }
-    svg {
-      display: block;
-      position: relative;
-      color: var(--color-red);
-
-      margin-bottom: -30px;
-      margin-left: 90px;
-      padding: 7px;
-    }
-    .number {
-      color: var(--color-dark-gray);
-      padding: 5px;
-    }
-    .name {
-      color: var(--color-black);
-      font-size: 20px;
-      font-weight: 700;
-      padding: 5px;
-    }
-    .types {
-      display: flex;
-      padding: 5px;
-      gap: 8px;
-    }
-  
+    padding: 5px;
+    gap: 8px;
+  }
 `;
 
 export const ListContainer = styled.div`

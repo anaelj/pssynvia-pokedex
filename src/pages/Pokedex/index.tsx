@@ -40,23 +40,39 @@ interface IPokemon {
   sp_atk: number;
   sp_def: number;
   speed: number;
-  like: boolean;
+  like?: boolean;
 }
 
 export const Pokedex = () => {
   const [textSearch, setTextSearch] = useState("");
   const [pokemonData, setPokemonData] = useState<IPokemon[]>([]);
+  const [pokemonDataDefault, setPokemonDataDefault] = useState<IPokemon[]>([]);
   const [pokeTypes, setPokeTypes] = useState<string[]>([]);
   const [filters, setFilters] = useState<string[]>([]);
   const [showLikeButton, setShowLikeButton] = useState(-1);
   const [onlyLiked, setOnlyLiked] = useState(false);
 
+  const resetData = (resetFilter: boolean = true) => {
+    const likes = pokemonData.filter((item) => item.like);
+    console.log(JSON.stringify(likes));
+    const newDataWithLikes = pokemonDataDefault.map((item) => {
+      return {
+        ...item,
+        like: likes.find(
+          (liked) =>
+            liked.national_number === item.national_number
+        )?.like
+          
+      };
+    });
+    setPokemonData(newDataWithLikes);
+    resetFilter && setFilters([]);
+    // return newDataWithLikes;
+  };
+
   useEffect(() => {
     if (textSearch.trim() === "") {
-      getPokemonList().then((data) => {
-        setPokemonData(data);
-        handleApplyFilters(data);
-      });
+      resetData();
     } else {
       setPokemonData(
         pokemonData.filter((item) => {
@@ -71,24 +87,26 @@ export const Pokedex = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [textSearch]);
 
-  const handleApplyFilters = (data: IPokemon[]) => {
+  const handleApplyFilters = () => {
     if (filters.length > 0) {
       setPokemonData([]);
       for (const key in filters) {
         const element = filters[key];
         setPokemonData([
-          ...data.filter((item) => item.type.toString().includes(element)),
+          ...pokemonData.filter((item) => item.type.toString().includes(element)),
         ]);
       }
     } else {
-      getPokemonList().then((data) => {
-        setPokemonData(data);
-      });
+      resetData();
+      // getPokemonList().then((data) => {
+      //   setPokemonData(data);
+      // });
     }
   };
 
   useEffect(() => {
-    handleApplyFilters(pokemonData);
+    console.log(filters)
+    handleApplyFilters();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
@@ -161,16 +179,15 @@ export const Pokedex = () => {
   useEffect(() => {
     getPokemonList().then((data) => {
       setPokemonData(data);
+      setPokemonDataDefault(data);
       makeTypes(data as IPokemon[]);
     });
   }, []);
 
   const handleFilterRefresh = (value: string) => {
     if (!!filters.find((element) => element === value)) {
-      getPokemonList().then((data) => {
-        setPokemonData(data);
+        resetData();
         setFilters(filters.filter((element) => element !== value));
-      });
     } else {
       setFilters([...filters, value]);
     }
@@ -188,11 +205,12 @@ export const Pokedex = () => {
 
   useEffect(() => {
     if (onlyLiked) {
-      setPokemonData(pokemonData.filter(item => item.like))
+      setPokemonData(pokemonData.filter((item) => item.like));
+    } else {
+      resetData();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onlyLiked])
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onlyLiked]);
 
   return (
     <>
@@ -219,7 +237,11 @@ export const Pokedex = () => {
               }}
             >
               {ordering.map((item, idx) => (
-                <option  key={idx} value={JSON.stringify(item)} selected={item.selected}>
+                <option
+                  key={idx}
+                  value={JSON.stringify(item)}
+                  selected={item.selected}
+                >
                   {item.caption}
                 </option>
               ))}
@@ -228,8 +250,8 @@ export const Pokedex = () => {
         </SearchBar>
         <MainContent>
           <FilterContainer>
-          <h2 style={{marginBottom:'8px'}}>Filtrar por</h2>
-            
+            <h2 style={{ marginBottom: "8px" }}>Filtrar por</h2>
+
             {pokeTypes.map((item, idx) => (
               <Button
                 key={idx}
@@ -239,8 +261,8 @@ export const Pokedex = () => {
                 <label>{item}</label>
               </Button>
             ))}
-            <div style={{marginTop: '16px', marginLeft: '5px'}}>
-              <div style={{paddingBottom: '6px'}}>Filtrar Favoritos</div>
+            <div style={{ marginTop: "16px", marginLeft: "5px" }}>
+              <div style={{ paddingBottom: "6px" }}>Filtrar Favoritos</div>
               <Switch
                 onChange={() => setOnlyLiked(!onlyLiked)}
                 checked={onlyLiked}
