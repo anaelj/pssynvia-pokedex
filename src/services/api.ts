@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://unpkg.com",
+  baseURL: "https://unpkg.com",
 });
 
 export const getPokemonList = async (): Promise<any[]> => {

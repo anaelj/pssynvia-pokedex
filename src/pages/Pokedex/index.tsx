@@ -237,7 +237,7 @@ export const Pokedex = () => {
                 <label>{item}</label>
               </Button>
             ))}
-            <div style={{marginTop: '16px'}}>
+            <div style={{marginTop: '16px', marginLeft: '5px'}}>
               <div style={{paddingBottom: '6px'}}>Filtrar Favoritos</div>
               <Switch
                 onChange={() => setOnlyLiked(!onlyLiked)}
