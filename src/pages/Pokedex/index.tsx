@@ -218,8 +218,8 @@ export const Pokedex = () => {
                 handleOrdering(JSON.parse(e.target.value));
               }}
             >
-              {ordering.map((item) => (
-                <option value={JSON.stringify(item)} selected={item.selected}>
+              {ordering.map((item, idx) => (
+                <option  key={idx} value={JSON.stringify(item)} selected={item.selected}>
                   {item.caption}
                 </option>
               ))}
@@ -228,8 +228,9 @@ export const Pokedex = () => {
         </SearchBar>
         <MainContent>
           <FilterContainer>
-            {pokeTypes.map((item) => (
+            {pokeTypes.map((item, idx) => (
               <Button
+                key={idx}
                 selected={!!filters.find((element) => element === item)}
                 onClick={() => handleFilterRefresh(item)}
               >
@@ -251,6 +252,7 @@ export const Pokedex = () => {
             <ul>
               {pokemonData.map((item, idx) => (
                 <ListContainerItem
+                  key={idx}
                   onClick={() => handleLike(idx)}
                   onMouseEnter={(e) => {
                     setShowLikeButton(idx);
@@ -271,8 +273,9 @@ export const Pokedex = () => {
                   <label className="number">Nº {item.national_number}</label>
                   <label className="name">{item.name}</label>
                   <div className="types">
-                    {item.type.map((typeItem) => (
+                    {item.type.map((typeItem, idx) => (
                       <div
+                        key={idx}
                         style={{
                           borderRadius: "0.3em",
                           color: `var(--color-white)`,
