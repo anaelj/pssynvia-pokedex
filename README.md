@@ -19,4 +19,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 Launches the test runner in the interactive watch mode.\
 
 
-![Imagem do projeto](https://github.com/anaelj/pssynvia-pokedex/blob/master/public/pokedex.png?raw=true "Title")
+![Imagem do projeto](https://github.com/anaelj/pssynvia-pokedex/blob/main/public/pokedex.png?raw=true "Title")
