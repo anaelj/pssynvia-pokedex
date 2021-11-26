@@ -42,10 +42,14 @@ interface IPokemon {
   speed: number;
 }
 
-export const Pokedex = () => {
+interface IProps {
+  dataDefault: IPokemon[];
+}
+
+export const Pokedex = ( {dataDefault = []} :IProps ) => {
+  const [pokemonData, setPokemonData] = useState<IPokemon[]>(dataDefault);
+  const [pokemonDataDefault, setPokemonDataDefault] = useState<IPokemon[]>(dataDefault);
   const [textSearch, setTextSearch] = useState("");
-  const [pokemonData, setPokemonData] = useState<IPokemon[]>([]);
-  const [pokemonDataDefault, setPokemonDataDefault] = useState<IPokemon[]>([]);
   const [pokeTypes, setPokeTypes] = useState<string[]>([]);
   const [filters, setFilters] = useState<string[]>([]);
   const [showLikeButton, setShowLikeButton] = useState(-1);
@@ -124,9 +128,6 @@ export const Pokedex = () => {
               : 0
           ),
         ]);
-        break;
-
-      default:
         break;
     }
   };
@@ -233,6 +234,7 @@ export const Pokedex = () => {
                   key={idx}
                   value={JSON.stringify(item)}
                   selected={item.selected}
+                  data-testid="orderingSelectItem"
                 >
                   {item.caption}
                 </option>
@@ -261,6 +263,7 @@ export const Pokedex = () => {
                 checkedIcon={false}
                 uncheckedIcon={false}
                 height={20}
+                data-testid="showOnlyLiked"
               />
             </div>
           </FilterContainer>
@@ -269,6 +272,7 @@ export const Pokedex = () => {
               {pokemonData.map((item, idx) => (
                 <ListContainerItem
                   key={idx}
+                  data-testid="pokemonItem"
                   onClick={() => handleUserLikePokemon(item.national_number)}
                   onMouseEnter={(e) => {
                     setShowLikeButton(idx);
@@ -281,7 +285,7 @@ export const Pokedex = () => {
                     {userPokemonLikes.find(
                       (liked) => liked === item.national_number
                     ) ? (
-                      <FaHeart />
+                      <FaHeart data-testid="likesvg"/>
                     ) : (
                       idx === showLikeButton && <FaRegHeart />
                     )}
