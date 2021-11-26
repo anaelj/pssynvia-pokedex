@@ -68,7 +68,7 @@ export const ListContainerItem = styled.li`
     color: var(--color-red);
 
     margin-bottom: -30px;
-    margin-left: 90px;
+    margin-left: 100px;
     padding: 7px;
   }
 
