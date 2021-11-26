@@ -31,7 +31,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --watchAll --silent",
+    "test:coverage": "jest --watchAll --silent --coverage",
     "eject": "react-scripts eject"
   },
   "jest": {
