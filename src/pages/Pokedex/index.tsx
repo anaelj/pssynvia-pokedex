@@ -131,7 +131,7 @@ export const Pokedex = () => {
     }
   };
   const ordering = [
-    { caption: "Nome Ascendente", value: "NomeAscendente", selected: true },
+    { caption: "Nome Ascendente", value: "NomeAscendente", selected: false },
     { caption: "Nome Descendente", value: "NomeDescendente", selected: false },
     {
       caption: "Número Ascendente",
@@ -143,6 +143,7 @@ export const Pokedex = () => {
       value: "NumeroDescendente",
       selected: false,
     },
+    { caption: "Nenhum", value: "undefined", selected: true },
   ];
   const makeTypes = (data: IPokemon[]) => {
     let listAllTypes = data.map((item) => {
@@ -276,7 +277,7 @@ export const Pokedex = () => {
                     setShowLikeButton(-1);
                   }}
                 >
-                  <div>
+                  <div style={{minHeight: '135px'}}>
                     {userPokemonLikes.find(
                       (liked) => liked === item.national_number
                     ) ? (

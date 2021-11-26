@@ -10,7 +10,7 @@ export const MyCustonSelect = ({ children, ...rest }: InputProps) => {
   
   return (
     <ContainerSelect>
-      <select {...rest} className='select_box' >
+      <select {...rest} defaultValue={''} >
         {children}
       </select>
     </ContainerSelect>
