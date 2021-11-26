@@ -9,6 +9,7 @@ import {
 import { Pokedex } from "./pages/Pokedex";
 import { pokeData } from "./test/moked.data";
 
+
 const ordering = [
   { caption: "Nome Ascendente", value: "NomeAscendente", selected: false },
   { caption: "Nome Descendente", value: "NomeDescendente", selected: false },
